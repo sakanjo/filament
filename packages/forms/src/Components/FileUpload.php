@@ -59,7 +59,7 @@ class FileUpload extends BaseFileUpload
 
     protected int $imageEditorMode = 1;
 
-    protected string | Closure $imageEditorEmptyFillColor = 'transparent';
+    protected string | Closure | null $imageEditorEmptyFillColor = null;
 
     /**
      * @var array<?string> | Closure
@@ -78,6 +78,8 @@ class FileUpload extends BaseFileUpload
         $this->isAvatar = true;
 
         $this->image();
+        $this->imageResizeMode('cover');
+        $this->imageResizeUpscale(false);
         $this->imageCropAspectRatio('1:1');
         $this->imageResizeTargetHeight('500');
         $this->imageResizeTargetWidth('500');
@@ -317,7 +319,7 @@ class FileUpload extends BaseFileUpload
         return $this;
     }
 
-    public function imageEditorEmptyFillColor(string | Closure $color): static
+    public function imageEditorEmptyFillColor(string | Closure | null $color): static
     {
         $this->imageEditorEmptyFillColor = $color;
 
@@ -374,7 +376,7 @@ class FileUpload extends BaseFileUpload
         return $this->imageEditorMode;
     }
 
-    public function getImageEditorEmptyFillColor(): string
+    public function getImageEditorEmptyFillColor(): ?string
     {
         return $this->evaluate($this->imageEditorEmptyFillColor);
     }

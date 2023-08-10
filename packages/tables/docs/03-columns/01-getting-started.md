@@ -141,7 +141,7 @@ public function table(Table $table): Table
 
 ## Searching
 
-Columns may be searchable, by using the text input field in the top right of the table. To make a column searchable, you must use the `searchable()` method:
+Columns may be searchable by using the text input field in the top right of the table. To make a column searchable, you must use the `searchable()` method:
 
 ```php
 use Filament\Tables\Columns\TextColumn;
@@ -227,6 +227,18 @@ public function table(Table $table): Table
         ->persistSearchInSession()
         ->persistColumnSearchesInSession();
 }
+```
+
+### Forcing case-insensitive column search
+
+By default, searching will use the sensitivity settings from the database table column. This is to avoid unnecessary performance overhead when searching large datasets that would arise if we were to force insensitivity for all users. However, if your database does not search case-insensitively by default, you can force it to by using the `forceSearchCaseInsensitive()` method:
+
+```php
+use Filament\Tables\Columns\TextColumn;
+
+TextColumn::make('name')
+    ->searchable()
+    ->forceSearchCaseInsensitive()
 ```
 
 ## Column actions and URLs
@@ -396,16 +408,17 @@ TextColumn::make('title')
 
 ## Aligning column content
 
-Table columns are aligned to the start (left in LTR interfaces or right in RTL interfaces) by default. You may change the alignment using the `alignment()` method, and passing it `start`, `center`, `end`, `left`, `right` or `justify` options:
+Table columns are aligned to the start (left in LTR interfaces or right in RTL interfaces) by default. You may change the alignment using the `alignment()` method, and passing it `Alignment::Start`, `Alignment::Center`, `Alignment::End` or `Alignment::Justify` options:
 
 ```php
+use Filament\Support\Enums\Alignment;
 use Filament\Tables\Columns\TextColumn;
 
-TextColumn::make('name')
-    ->alignment('end')
+TextColumn::make('email')
+    ->alignment(Alignment::End)
 ```
 
-<AutoScreenshot name="tables/columns/alignment" alt="Table with column aligned to the right" version="3.x" />
+<AutoScreenshot name="tables/columns/alignment" alt="Table with column aligned to the end" version="3.x" />
 
 Alternatively, you may use shorthand methods like `alignEnd()`:
 

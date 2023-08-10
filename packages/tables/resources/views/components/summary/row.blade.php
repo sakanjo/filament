@@ -13,8 +13,9 @@
 ])
 
 @php
-    use Filament\Tables\Actions\Position as ActionsPosition;
-    use Filament\Tables\Actions\RecordCheckboxPosition;
+    use Filament\Support\Enums\Alignment;
+    use Filament\Tables\Enums\ActionsPosition;
+    use Filament\Tables\Enums\RecordCheckboxPosition;
 @endphp
 
 <x-filament-tables::row
@@ -61,19 +62,19 @@
                 :colspan="($loop->first && (! $extraHeadingColumn) && (! $groupsOnly) && ($headingColumnSpan > 1)) ? $headingColumnSpan : null"
                 @class([
                     match ($column->getAlignment()) {
-                        'start' => 'text-start',
-                        'center' => 'text-center',
-                        'end' => 'text-end',
-                        'left' => 'text-left',
-                        'right' => 'text-right',
-                        'justify' => 'text-justify',
+                        Alignment::Start, 'start' => 'text-start',
+                        Alignment::Center, 'center' => 'text-center',
+                        Alignment::End, 'end' => 'text-end',
+                        Alignment::Left, 'left' => 'text-left',
+                        Alignment::Right, 'right' => 'text-right',
+                        Alignment::Justify, 'justify' => 'text-justify',
                         default => null,
                     },
                 ])
             >
                 @if ($loop->first && (! $extraHeadingColumn) && (! $groupsOnly))
                     <span
-                        class="flex text-sm font-medium text-gray-950 dark:text-white"
+                        class="flex px-3 py-4 text-sm font-medium text-gray-950 dark:text-white"
                     >
                         {{ $heading }}
                     </span>

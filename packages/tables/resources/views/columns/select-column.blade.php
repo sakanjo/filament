@@ -40,7 +40,10 @@
     {{
         $attributes
             ->merge($getExtraAttributes(), escape: false)
-            ->class(['fi-ta-select'])
+            ->class([
+                'fi-ta-select',
+                'px-3 py-4' => ! $isInline(),
+            ])
     }}
 >
     <input
@@ -49,7 +52,7 @@
         x-ref="newState"
     />
 
-    <x-filament-forms::affixes
+    <x-filament::input.wrapper
         :alpine-disabled="'isLoading || ' . \Illuminate\Support\Js::from($isDisabled)"
         alpine-valid="error === undefined"
         x-tooltip="
@@ -97,5 +100,5 @@
                 </option>
             @endforeach
         </x-filament::input.select>
-    </x-filament-forms::affixes>
+    </x-filament::input.wrapper>
 </div>

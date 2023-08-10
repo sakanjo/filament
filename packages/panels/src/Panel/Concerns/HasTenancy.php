@@ -190,6 +190,13 @@ trait HasTenancy
     public function getTenantMenuItems(): array
     {
         return collect($this->tenantMenuItems)
+            ->filter(function (MenuItem $item, string | int $key): bool {
+                if (in_array($key, ['billing', 'profile', 'register'])) {
+                    return true;
+                }
+
+                return $item->isVisible();
+            })
             ->sort(fn (MenuItem $item): int => $item->getSort())
             ->all();
     }

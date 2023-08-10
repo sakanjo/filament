@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use function Laravel\Prompts\confirm;
 
 class InstallCommand extends Command
 {
@@ -30,7 +31,10 @@ class InstallCommand extends Command
 
         $this->installUpgradeCommand();
 
-        if ($this->confirm('All done! Would you like to show some love by starring the Filament repo on GitHub?', true)) {
+        if (confirm(
+            label: 'All done! Would you like to show some love by starring the Filament repo on GitHub?',
+            default: true,
+        )) {
             if (PHP_OS_FAMILY === 'Darwin') {
                 exec('open https://github.com/filamentphp/filament');
             }
@@ -66,6 +70,7 @@ class InstallCommand extends Command
         }
 
         $this->components->info('Successfully created AdminPanelProvider.php!');
+        $this->components->warn('We\'ve attempted to register the AdminPanelProvider in your [config/app.php] file as a service provider. If you get an error while trying to access your panel then this process has probably failed. You can manually register the service provider by adding it to the [providers] array.');
     }
 
     protected function installScaffolding(): void

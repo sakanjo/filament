@@ -7,9 +7,9 @@ import AutoScreenshot from "@components/AutoScreenshot.astro"
 
 Field classes can be found in the `Filament\Form\Components` namespace.
 
-Fields reside within the schema of your form, alongside any [layout components](layout).
+Fields reside within the schema of your form, alongside any [layout components](layout/getting-started).
 
-Fields may be created using the static `make()` method, passing its unique name. The name of the field should correspond to a property on your Livewire component. You may use [Livewire's "dot notation"](https://laravel-livewire.com/docs/properties#binding-nested-data) to bind fields to arrays.
+Fields may be created using the static `make()` method, passing its unique name. The name of the field should correspond to a property on your Livewire component. You may use "dot notation" to bind fields to keys in arrays.
 
 ```php
 use Filament\Forms\Components\TextInput;
@@ -177,6 +177,17 @@ RichEditor::make('content')
 
 <AutoScreenshot name="forms/fields/hint-icon" alt="Form field with hint icon" version="3.x" />
 
+#### Adding a tooltip to a hint icon
+
+Additionally, you can add a tooltip to display when you hover over the hint icon, using the `tooltip` parameter of `hintIcon()`:
+
+```php
+use Filament\Forms\Components\TextInput;
+
+TextInput::make('name')
+    ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Need some more information?')
+```
+
 ## Adding extra HTML attributes
 
 You can pass extra HTML attributes to the field, which will be merged onto the outer DOM element. Pass an array of attributes to the `extraAttributes()` method, where the key is the attribute name and the value is the attribute value:
@@ -227,7 +238,7 @@ Toggle::make('is_admin')
     ->dehydrated()
 ```
 
-Please note that if you choose to dehydrate the field, a skilled user could still edit the field's value by manipulating Livewire's JavaScript.
+> If you choose to dehydrate the field, a skilled user could still edit the field's value by manipulating Livewire's JavaScript.
 
 ### Hiding a field
 

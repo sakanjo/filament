@@ -2,6 +2,12 @@
 
 return [
 
+    'column_toggle' => [
+
+        'heading' => 'Oszlopok',
+
+    ],
+
     'columns' => [
 
         'text' => [
@@ -12,44 +18,44 @@ return [
 
     'fields' => [
 
+        'bulk_select_page' => [
+            'label' => 'Az összes elem kiválasztása/kiválasztásának megszüntetése tömeges műveletekhez.',
+        ],
+
+        'bulk_select_record' => [
+            'label' => ':key elem kiválasztása/kiválasztásának megszüntetése tömeges műveletekhez.',
+        ],
+
         'search' => [
             'label' => 'Keresés',
-            'placeholder' => 'Keres',
+            'placeholder' => 'Keresés',
+            'indicator' => 'Keres',
         ],
 
     ],
 
-    'pagination' => [
+    'summary' => [
 
-        'label' => 'Lapozás',
+        'heading' => 'Összesítés',
 
-        'overview' => ':first től :last ig mutatása a :total találatból',
-
-        'fields' => [
-
-            'records_per_page' => [
-
-                'label' => 'oldalanként',
-
-                'options' => [
-                    'all' => 'Összes',
-                ],
-            ],
-
+        'subheadings' => [
+            'all' => 'Összes :label',
+            'group' => ':group összesítése',
+            'page' => 'Ezen az oldalon',
         ],
 
-        'actions' => [
+        'summarizers' => [
 
-            'go_to_page' => [
-                'label' => 'Ugrás az oldalra: :page',
+            'average' => [
+                'label' => 'Átlag',
             ],
 
-            'next' => [
-                'label' => 'Következő',
+            'count' => [
+                'label' => 'Darab',
             ],
 
-            'previous' => [
-                'label' => 'Előző',
+            'sum' => [
+                'label' => 'Szumma',
             ],
 
         ],
@@ -70,6 +76,10 @@ return [
             'label' => 'Szűrés',
         ],
 
+        'group' => [
+            'label' => 'Csoport',
+        ],
+
         'open_bulk_actions' => [
             'label' => 'Műveletek magjelenítése',
         ],
@@ -81,7 +91,11 @@ return [
     ],
 
     'empty' => [
+
         'heading' => 'Nincs találat',
+
+        'description' => 'Hozzon létre egy :model a kezdéshez.',
+
     ],
 
     'filters' => [
@@ -102,6 +116,8 @@ return [
             ],
 
         ],
+
+        'heading' => 'Szűrők',
 
         'indicator' => 'Aktív szűrők',
 
@@ -127,11 +143,35 @@ return [
 
     ],
 
+    'grouping' => [
+
+        'fields' => [
+
+            'group' => [
+                'label' => 'Csoportosítás',
+                'placeholder' => 'Csoportosítás',
+            ],
+
+            'direction' => [
+
+                'label' => 'Csoportosítás iránya',
+
+                'options' => [
+                    'asc' => 'Növekvő',
+                    'desc' => 'Csökkenő',
+                ],
+
+            ],
+
+        ],
+
+    ],
+
     'reorder_indicator' => 'Fogd meg és mozgasd a sorrendezéshez.',
 
     'selection_indicator' => [
 
-        'selected_count' => '1 elem kiválasztva .|:count elem kiválasztva.',
+        'selected_count' => '1 elem kiválasztva|:count elem kiválasztva',
 
         'actions' => [
 

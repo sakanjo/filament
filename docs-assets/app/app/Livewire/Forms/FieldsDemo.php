@@ -164,6 +164,21 @@ class FieldsDemo extends Component implements HasForms
                             ->label('Status'),
                     ]),
                 Group::make()
+                    ->id('javascriptSelect')
+                    ->extraAttributes([
+                        'class' => 'px-16 pt-16 pb-48 max-w-xl',
+                    ])
+                    ->schema([
+                        Select::make('javascriptSelect')
+                            ->label('Status')
+                            ->native(false)
+                            ->options([
+                                'draft' => 'Draft',
+                                'reviewing' => 'Reviewing',
+                                'published' => 'Published',
+                            ]),
+                    ]),
+                Group::make()
                     ->id('searchableSelect')
                     ->extraAttributes([
                         'class' => 'px-16 pt-16 pb-72 max-w-xl',
@@ -194,6 +209,26 @@ class FieldsDemo extends Component implements HasForms
                                 'alpine' => 'Alpine.js',
                                 'laravel' => 'Laravel',
                                 'livewire' => 'Laravel Livewire',
+                            ]),
+                    ]),
+                Group::make()
+                    ->id('groupedSelect')
+                    ->extraAttributes([
+                        'class' => 'px-16 pt-16 pb-96 max-w-xl',
+                    ])
+                    ->schema([
+                        Select::make('groupedSelect')
+                            ->label('Status')
+                            ->searchable()
+                            ->options([
+                                'In Process' => [
+                                    'draft' => 'Draft',
+                                    'reviewing' => 'Reviewing',
+                                ],
+                                'Reviewed' => [
+                                    'published' => 'Published',
+                                    'rejected' => 'Rejected',
+                                ],
                             ]),
                     ]),
                 Group::make()

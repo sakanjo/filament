@@ -12,15 +12,16 @@
 ])
 
 @php
-    use Filament\Tables\Actions\Position as ActionsPosition;
-    use Filament\Tables\Actions\RecordCheckboxPosition;
+    use Filament\Support\Enums\Alignment;
+    use Filament\Tables\Enums\ActionsPosition;
+    use Filament\Tables\Enums\RecordCheckboxPosition;
 
     $hasPageSummary = (! $groupsOnly) && $records instanceof \Illuminate\Contracts\Pagination\Paginator && $records->hasPages();
 @endphp
 
 @if ($hasPageSummary)
     <x-filament-tables::row
-        class="fi-ta-summary-header-row bg-gray-50 dark:bg-gray-800"
+        class="fi-ta-summary-header-row bg-gray-50 dark:bg-white/5"
     >
         @if ($placeholderColumns && $actions && in_array($actionsPosition, [ActionsPosition::BeforeCells, ActionsPosition::BeforeColumns]))
             <td></td>
@@ -49,12 +50,12 @@
                                 'whitespace-nowrap' => ! $column->isHeaderWrapped(),
                                 'whitespace-normal' => $column->isHeaderWrapped(),
                                 match ($column->getAlignment()) {
-                                    'start' => 'text-start',
-                                    'center' => 'text-center',
-                                    'end' => 'text-end',
-                                    'left' => 'text-left',
-                                    'right' => 'text-right',
-                                    'justify' => 'text-justify',
+                                    Alignment::Start, 'start' => 'text-start',
+                                    Alignment::Center, 'center' => 'text-center',
+                                    Alignment::End, 'end' => 'text-end',
+                                    Alignment::Left, 'left' => 'text-left',
+                                    Alignment::Right, 'right' => 'text-right',
+                                    Alignment::Justify, 'justify' => 'text-justify',
                                     default => null,
                                 } => (! ($loop->first && (! $extraHeadingColumn))) && $hasColumnHeaderLabel,
                             ])
@@ -115,6 +116,6 @@
     :selected-state="$selectedState"
     :selection-enabled="$selectionEnabled"
     @class([
-        'bg-gray-50 dark:bg-gray-800' => ! $hasPageSummary,
+        'bg-gray-50 dark:bg-white/5' => ! $hasPageSummary,
     ])
 />
